@@ -1,0 +1,19 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "meta": {
+    "title": "霧莓美甲 Mulberry Nail（WordPress 版）",
+    "description": "作品集範例：美甲工作室網站，含線上預約、預約管理後台、可自行修改的價目表。",
+    "author": "chraining21"
+  },
+  "landingPage": "/",
+  "preferredVersions": { "php": "8.3", "wp": "latest" },
+  "features": { "networking": true },
+  "login": true,
+  "steps": [
+    { "step": "setSiteLanguage", "language": "zh_TW" },
+    { "step": "setSiteOptions", "options": { "blogname": "霧莓美甲 Mulberry Nail", "blogdescription": "台北中山・一人美甲工作室", "timezone_string": "Asia/Taipei" } },
+    { "step": "writeFile", "path": "/wordpress/wp-content/plugins/mulberry-booking/mulberry-booking.php",
+      "data": { "resource": "url", "url": "https://raw.githubusercontent.com/chraining21/chraining21.github.io/main/mulberry-nail/wordpress/mulberry-booking.php" } },
+    { "step": "activatePlugin", "pluginPath": "mulberry-booking/mulberry-booking.php" }
+  ]
+}
