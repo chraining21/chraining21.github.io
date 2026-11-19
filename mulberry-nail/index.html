@@ -169,10 +169,23 @@ footer{border-top:1px solid var(--line);padding-block:24px;font-size:.85rem;colo
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* demo strip + modules */
+.demo{background:var(--ink);color:var(--bg);font-size:.85rem}
+.demo .wrap{display:flex;gap:12px 20px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding-block:9px}
+.demo a{color:var(--berry-soft);text-underline-offset:3px}
+.modules{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:16px}
+.mod{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;gap:6px;text-decoration:none;align-content:start}
+.mod:hover{border-color:var(--berry)}
+.mod b{font-family:var(--f-head)}
+.mod p{margin:0;color:var(--muted);font-size:.9rem}
+.mod span{font-size:.8rem;color:var(--berry)}
+.styles{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;align-items:center;color:var(--muted);font-size:.9rem}
 </style>
 </head>
 <body>
 
+<div class="demo"><div class="wrap"><span>作品集展示：這是「功能模組」範例，配色與版型會依您的品牌另外設計</span><a href="style-paper/">看同樣內容的另一種風格 →</a></div></div>
 <header class="nav">
   <div class="wrap">
     <a class="logo" href="#top">Mulberry <small>霧莓美甲</small></a>
@@ -208,6 +221,27 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       </aside>
     </div>
   </section>
+
+
+  <section id="modules">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Modules</div><h2>這個網站由哪些模組組成</h2></div>
+        <p>每個模組都可以單獨挑選、加減。先決定要哪些功能，風格與頁面配置再跟您一起討論。</p>
+      </div>
+      <div class="modules">
+        <a class="mod" href="#top"><b>形象首頁</b><p>店名、一句話介紹、今日空檔，讓客人一進來就知道能不能約。</p><span>本頁示範 ↑</span></a>
+        <a class="mod" href="#menu"><b>價目表</b><p>服務、價格、所需時間一次看清楚，減少私訊詢價。</p><span>本頁示範 ↓</span></a>
+        <a class="mod" href="#looks"><b>作品／款式展示</b><p>放店內作品或本季款式，客人預約時直接指定。</p><span>本頁示範 ↓</span></a>
+        <a class="mod" href="#book"><b>線上預約</b><p>依服務長度自動計算可約時段，已約走的自動關閉，不會撞單。</p><span>本頁示範 ↓</span></a>
+        <a class="mod" href="#admin"><b>店家後台</b><p>每日預約清單、取消預約、未來 7 天預估營收。</p><span>本頁示範 ↓</span></a>
+        <a class="mod" href="#visit"><b>交通與須知</b><p>地址、營業時間、遲到改期規則，常見問題不用再回答。</p><span>本頁示範 ↓</span></a>
+        <div class="mod"><b>其他可加購</b><p>LINE 預約通知、會員集點、線上付訂金、多位美甲師排班。</p><span>依需求報價</span></div>
+      </div>
+      <div class="styles">同一份內容可以換不同風格：<a href="./">黑粉色（本頁）</a>・<a href="style-paper/">白色價目卡</a></div>
+    </div>
+  </section>
+
 
   <section id="menu">
     <div class="wrap">
