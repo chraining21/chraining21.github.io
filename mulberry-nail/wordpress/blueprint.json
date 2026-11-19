@@ -6,14 +6,42 @@
     "author": "chraining21"
   },
   "landingPage": "/",
-  "preferredVersions": { "php": "8.3", "wp": "latest" },
-  "features": { "networking": true },
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "latest"
+  },
+  "features": {
+    "networking": true
+  },
   "login": true,
   "steps": [
-    { "step": "setSiteLanguage", "language": "zh_TW" },
-    { "step": "setSiteOptions", "options": { "blogname": "霧莓美甲 Mulberry Nail", "blogdescription": "台北中山・一人美甲工作室", "timezone_string": "Asia/Taipei" } },
-    { "step": "writeFile", "path": "/wordpress/wp-content/plugins/mulberry-booking/mulberry-booking.php",
-      "data": { "resource": "url", "url": "https://raw.githubusercontent.com/chraining21/chraining21.github.io/main/mulberry-nail/wordpress/mulberry-booking.php" } },
-    { "step": "activatePlugin", "pluginPath": "mulberry-booking/mulberry-booking.php" }
+    {
+      "step": "setSiteLanguage",
+      "language": "zh_TW"
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "霧莓美甲 Mulberry Nail",
+        "blogdescription": "台北中山・一人美甲工作室",
+        "timezone_string": "Asia/Taipei"
+      }
+    },
+    {
+      "step": "mkdir",
+      "path": "/wordpress/wp-content/plugins/mulberry-booking"
+    },
+    {
+      "step": "writeFile",
+      "path": "/wordpress/wp-content/plugins/mulberry-booking/mulberry-booking.php",
+      "data": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/chraining21/chraining21.github.io/main/mulberry-nail/wordpress/mulberry-booking.php"
+      }
+    },
+    {
+      "step": "activatePlugin",
+      "pluginPath": "mulberry-booking/mulberry-booking.php"
+    }
   ]
 }
