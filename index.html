@@ -137,6 +137,33 @@ nav a:hover::after,nav a.on::after{transform:scaleX(1)}
 .hero .in>*:nth-child(2){animation-delay:.08s}.hero .in>*:nth-child(3){animation-delay:.16s}.hero .in>*:nth-child(4){animation-delay:.24s}.hero .in>*:nth-child(5){animation-delay:.32s}.hero .in>*:nth-child(6){animation-delay:.4s}
 @media (prefers-reduced-motion:reduce){.job::after{transform:none;transition:none}.stagger>*,.stagger.wait>*{opacity:1;transform:none}.skill::before{transition:none;transform:none}.typing #tw::after{animation:none}.hero .in>*{animation:none}.fade,.fade.wait{opacity:1;transform:none;transition:none}}
 
+/* 作品 */
+.live{color:var(--accent);font-weight:500}
+.live::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#3aa76d;margin-right:6px;vertical-align:1px}
+.work{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px 26px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.work+.work{margin-top:20px}
+.work:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 10px 24px color-mix(in srgb,var(--fg) 8%,transparent)}
+.work .kind{font:500 .8rem var(--mono);color:var(--accent);letter-spacing:.05em}
+.work h3{margin:4px 0 6px;font-size:1.2rem}
+.work>p{margin:0;color:var(--muted)}
+.flow{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;counter-reset:f}
+.flow li{counter-increment:f;font-size:.9rem;color:var(--muted);border-left:2px solid var(--accent-soft);padding-left:12px}
+.flow li b{display:block;color:var(--fg);font-weight:500}
+.flow li b::before{content:counter(f,decimal-leading-zero) " ";font:500 .8rem var(--mono);color:var(--accent)}
+.work .ai{margin:16px 0 0;font-size:.9rem;color:var(--muted);background:var(--accent-soft);border-radius:8px;padding:10px 14px}
+.work .ai b{color:var(--accent);font-weight:500}
+.work .note{margin:12px 0 0;font-size:.88rem;color:var(--muted);border-left:3px solid var(--line);padding-left:12px}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.links .btn{padding:7px 16px;font-size:.88rem}
+/* 接案服務 */
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.svc div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.svc h3{margin:0 0 4px;font-size:1rem}
+.svc p{margin:0;color:var(--muted);font-size:.92rem}
+.svc .price{display:block;margin-top:10px;font:500 .85rem var(--mono);color:var(--accent)}
+.promise{margin:20px 0 0;padding-left:1.1em;color:var(--muted);font-size:.95rem}
+@media (max-width:860px){.flow{grid-template-columns:1fr 1fr}.svc{grid-template-columns:1fr}}
+
 @media (max-width:860px){
   nav ul{display:none}
   .sec{grid-template-columns:1fr;gap:20px}
@@ -154,9 +181,11 @@ nav a:hover::after,nav a.on::after{transform:scaleX(1)}
   <div class="brand">Amy Chen<span>Backend</span></div>
   <ul>
     <li><a href="#about">關於我</a></li>
+    <li><a href="#works">作品</a></li>
     <li><a href="#experience">工作經歷</a></li>
     <li><a href="#skills">專長</a></li>
     <li><a href="#education">學歷與證照</a></li>
+    <li><a href="#services">接案服務</a></li>
     <li><a href="#contact">聯絡我</a></li>
   </ul>
 </div></nav>
@@ -166,8 +195,8 @@ nav a:hover::after,nav a.on::after{transform:scaleX(1)}
   <h1>我擅長把雜亂的工作內容流程化，高效率又完善地完成每一份需求。</h1>
   <p class="intro">Hello！我是 Amy，擁有近三年 Java 後端工程師經驗，參與遊戲平台與營運後台的開發維護，從微服務模組、資料庫優化、金流串接到系統部署都有實際經驗。擅長溝通、熱愛分享、喜愛學習。</p>
   <div class="typing" aria-hidden="true"><span class="k">&gt;</span> <span id="tw"></span></div>
-  <div class="facts"><div><b>經歷</b>　遊戲平台軟體公司 後端工程師（2023–2026）</div><div><b>學歷</b>　資訊管理系 畢業</div></div>
-  <div class="cta"><a class="btn primary" href="#experience">看工作經歷</a><a class="btn" href="#contact">聯絡我</a></div>
+  <div class="facts"><div><b>經歷</b>　遊戲平台軟體公司 後端工程師（2023–2026）</div><div><b>學歷</b>　資訊管理系 畢業</div><div><b>狀態</b>　<span class="live">求職中・可接網站案</span></div></div>
+  <div class="cta"><a class="btn primary" href="#works">看作品</a><a class="btn" href="#experience">看工作經歷</a><a class="btn" href="#contact">聯絡我</a></div>
 </div></header>
 
 <main>
@@ -181,6 +210,42 @@ nav a:hover::after,nav a.on::after{transform:scaleX(1)}
       <div><b>5 家以上</b><span>第三方金流串接</span></div>
       <div><b>7 台</b><span>Tomcat 叢集部署</span></div>
     </div>
+  </div>
+</div></section>
+
+<section id="works"><div class="in sec">
+  <h2>作品<small>WORKS</small></h2>
+  <div>
+    <article class="work">
+      <div class="kind">WEB · 小店預約網站</div>
+      <h3>霧莓美甲 Mulberry Nail</h3>
+      <p>與 AI 協作完成的美甲小店線上預約網站（店名為虛構範例）。客人 30 秒選好服務與時段，系統自動擋掉撞單；店家在後台看預約、取消與 7 天營收，不用再一則一則回私訊。</p>
+      <ol class="flow">
+        <li><b>需求</b>整理小店最常見的痛點：私訊預約、撞單、算帳</li>
+        <li><b>設計</b>價目表、人氣款、三步驟預約流程</li>
+        <li><b>開發</b>靜態網站版＋WordPress 外掛版</li>
+        <li><b>上線</b>部署到 GitHub Pages，手機電腦都能用</li>
+      </ol>
+      <p class="ai"><b>AI 協作開發：</b>需求規劃、功能設計、程式審查、測試與部署由我負責，搭配 Claude 加速程式實作。</p>
+      <div class="tags"><span>HTML / CSS / JS</span><span>WordPress</span><span>PHP</span><span>RWD</span><span>AI 協作開發</span></div>
+      <div class="links"><a class="btn primary" href="https://chraining21.github.io/mulberry-nail/" target="_blank" rel="noopener">看網站</a></div>
+    </article>
+    <article class="work">
+      <div class="kind">WEB · 品牌官網＋詢價系統</div>
+      <h3>Lumenfield 燈光品牌網站</h3>
+      <p>與 AI 協作完成的中英雙語燈具品牌網站（品牌為虛構範例）。前台展示產品、讓客戶送出詢價，後端以 Spring Boot 處理詢價資料。</p>
+      <p class="note">⏳ 後端架在免費主機上，閒置後會休眠，第一次開啟或送出詢價可能要等約 1 分鐘喚醒，之後就會恢復正常速度。</p>
+      <p class="ai"><b>AI 協作開發：</b>需求規劃、API 與資料設計、程式審查、測試與部署由我負責，搭配 AI 加速程式實作。</p>
+      <div class="tags"><span>Next.js</span><span>Spring Boot</span><span>中英雙語</span><span>Vercel</span><span>AI 協作開發</span></div>
+      <div class="links"><a class="btn primary" href="https://lumenfield-chi.vercel.app" target="_blank" rel="noopener">看網站</a><a class="btn" href="https://github.com/chraining21/lumenfield" target="_blank" rel="noopener">GitHub</a></div>
+    </article>
+    <article class="work">
+      <div class="kind">WEB · 個人網站</div>
+      <h3>這個網站</h3>
+      <p>與 AI 協作完成的個人網站：捲動浮現、時間線、打字輪播、深淺色自動切換，並支援手機瀏覽。</p>
+      <p class="ai"><b>AI 協作開發：</b>內容、版型與互動由我規劃與審查，搭配 Claude 實作，並自行部署上線。</p>
+      <div class="tags"><span>HTML / CSS / JS</span><span>GitHub Pages</span><span>AI 協作開發</span></div>
+    </article>
   </div>
 </div></section>
 
@@ -276,6 +341,23 @@ nav a:hover::after,nav a.on::after{transform:scaleX(1)}
   </div>
 </div></section>
 
+<section id="services"><div class="in sec">
+  <h2>接案服務<small>SERVICES</small></h2>
+  <div>
+    <div class="svc stagger">
+      <div><h3>小店形象網站</h3><p>店家介紹、價目表、作品照、地圖與聯絡方式，手機好看好找。</p><span class="price">依需求報價</span></div>
+      <div><h3>線上預約／報名</h3><p>客人自己選時段，自動擋撞單，店家有後台可以管理。</p><span class="price">依需求報價</span></div>
+      <div><h3>網站修改與維護</h3><p>WordPress 調整、錯誤修復、資料庫與後端問題排查。</p><span class="price">依需求報價</span></div>
+    </div>
+    <ul class="promise">
+      <li>近三年後端與金流經驗，重視資料正確與系統穩定</li>
+      <li>善用 AI 工具加速開發，交期更短，關鍵邏輯與資料安全仍由我親自把關</li>
+      <li>上線後提供使用教學，有問題找得到人</li>
+    </ul>
+    <div class="cta"><a class="btn primary" href="#contact">聊聊你的需求</a></div>
+  </div>
+</div></section>
+
 <section id="contact"><div class="in sec">
   <h2>聯絡我<small>CONTACT</small></h2>
   <div>
@@ -283,6 +365,7 @@ nav a:hover::after,nav a.on::after{transform:scaleX(1)}
       <dt>希望職稱</dt><dd>後端工程師、軟體工程師</dd>
       <dt>希望地點</dt><dd>台北、新北、桃園、新竹、台中，對遠端工作有意願</dd>
       <dt>可上班日</dt><dd>錄取後一個月</dd>
+      <dt>接案</dt><dd>小店網站、線上預約、網站修改維護，可遠端</dd>
     </dl>
     <div class="contact">
       <span class="email" id="email">mimichanwork2025@gmail.com</span>
@@ -302,7 +385,7 @@ nav a:hover::after,nav a.on::after{transform:scaleX(1)}
   const onS=()=>{const h=document.documentElement;bar.style.transform='scaleX('+(h.scrollTop/((h.scrollHeight-h.clientHeight)||1))+')'};addEventListener('scroll',onS,{passive:true});onS();
 
   /* 捲動浮現：畫面內的直接顯示，下面的捲到才出現 */
-  const items=document.querySelectorAll('section h2, section .sec>div>p, .job, .skill, .rows, .kv, .contact, .stagger');
+  const items=document.querySelectorAll('section h2, section .sec>div>p, .job, .work, .promise, .skill, .rows, .kv, .contact, .stagger');
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('wait');if(e.target.classList.contains('job'))e.target.classList.add('drawn');io.unobserve(e.target)}}),{threshold:.12});
   items.forEach(el=>{if(!el.classList.contains('stagger'))el.classList.add('fade');
     if(el.classList.contains('stagger'))[...el.children].forEach((c,i)=>c.style.transitionDelay=i*110+'ms');
