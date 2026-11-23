@@ -46,7 +46,18 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .top nav a{text-decoration:none;color:var(--muted)}
 .top nav a:hover{color:var(--ink)}
 .cta{text-decoration:none;font-size:.9rem;border-bottom:1px solid var(--ink);padding-bottom:2px}
-@media (max-width:760px){.top nav{display:none}}
+.nav-toggle{display:none;background:none;border:1px solid var(--line);min-height:44px;padding:0 14px;cursor:pointer;font-size:.9rem;white-space:nowrap}
+.nav-toggle:hover{border-color:var(--ink)}
+@media (max-width:760px){
+  .top .wrap{gap:12px}
+  .brand b{font-size:1.3rem}
+  .brand span{letter-spacing:.1em}
+  .brand span,.cta{white-space:nowrap}
+  .nav-toggle{display:block}
+  .top nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px max(16px,env(safe-area-inset-left,0px)) 16px}
+  .top nav.open{display:flex}
+  .top nav a{padding:10px 0;font-size:1rem}
+}
 
 /* hero */
 .hero{border-bottom:1px solid var(--line)}
@@ -159,7 +170,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#top"><b>Mulberry</b><span>霧莓美甲</span></a>
-    <nav aria-label="主選單">
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav">選單</button>
+    <nav aria-label="主選單" id="siteNav">
       <a href="#menu">價目</a>
       <a href="#colors">本季色卡</a>
       <a href="#rules">預約須知</a>
@@ -417,9 +429,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   $("adminDay").addEventListener("change",renderAdmin);
   $("adminRows").addEventListener("click",e=>{
     const id=e.target.dataset&&e.target.dataset.cancel;if(!id)return;
-    const b=bookings.find(x=>x.id===id);if(b){b.status="cancel";save();renderAdmin();renderForm();renderToday()}
+    const b=bookings.find(x=>x.id===id);if(b&&confirm(`確定要取消 ${b.name} ${hm(b.start)} 的預約嗎？`)){b.status="cancel";save();renderAdmin();renderForm();renderToday()}
   });
-  $("resetBtn").addEventListener("click",()=>{bookings=seed();save();renderAdmin();renderForm();renderToday()});
+  $("resetBtn").addEventListener("click",()=>{if(!confirm("確定要重設嗎？剛才新增或取消的預約都會清掉。"))return;bookings=seed();save();renderAdmin();renderForm();renderToday()});
+
+  /* mobile nav */
+  const navT=$("navToggle"),navL=$("siteNav");
+  const setNav=open=>{navL.classList.toggle("open",open);navT.setAttribute("aria-expanded",open)};
+  navT.addEventListener("click",()=>setNav(!navL.classList.contains("open")));
+  navL.addEventListener("click",e=>{if(e.target.closest("a"))setNav(false)});
+  addEventListener("keydown",e=>{if(e.key==="Escape"&&navL.classList.contains("open")){setNav(false);navT.focus()}});
 
   state.svc="grad";state.date=ymd(days.find(d=>isOpenDay(d)&&d>today)||today);
   renderForm();renderToday();renderAdmin();

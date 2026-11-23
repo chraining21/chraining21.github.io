@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>霧莓美甲 Mulberry Nail</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#fbf7f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171217" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap">
@@ -12,8 +14,8 @@
 /* Layout: 窄版單欄雜誌感，服務價目像沙龍價目卡，預約區是三步驟表單＋右側摘要 */
 :root{
   --bg:#fbf7f8; --surface:#ffffff; --tint:#f3e9ee;
-  --ink:#2b1f2c; --muted:#7d6f7b; --line:#e7dce2;
-  --berry:#a8456f; --berry-soft:#f6dde8; --sage:#5f8473; --sage-soft:#e1ece6;
+  --ink:#2b1f2c; --muted:#6e616c; --line:#e7dce2;
+  --berry:#983c64; --berry-soft:#f6dde8; --sage:#4a6e5e; --sage-soft:#e1ece6;
   --danger:#b3423a;
   --f-display:"DM Serif Display","Noto Serif TC",Georgia,serif;
   --f-head:"Noto Serif TC","Songti TC",serif;
@@ -59,7 +61,17 @@ header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background
 .btn-ghost{background:transparent;border:1px solid var(--line)}
 .btn-ghost:hover{border-color:var(--ink)}
 .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
-@media (max-width:640px){.nav nav{display:none}}
+.nav-toggle{display:none;margin-left:auto;background:none;border:1px solid var(--line);border-radius:999px;min-height:44px;padding:0 16px;cursor:pointer;font-size:.92rem;white-space:nowrap}
+.logo small{white-space:nowrap}
+.nav-toggle:hover{border-color:var(--ink)}
+@media (max-width:640px){
+  .nav .wrap{gap:8px}
+  .nav-toggle{display:block;padding:0 14px}
+  .nav .btn-primary{padding:10px 16px;white-space:nowrap}
+  .nav nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px max(16px,env(safe-area-inset-left,0px)) 16px}
+  .nav nav.open{display:flex}
+  .nav nav a{padding:10px 0;font-size:1rem}
+}
 
 /* hero */
 .hero{padding-block:56px 40px}
@@ -83,7 +95,7 @@ header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background
 
 section{padding-block:56px}
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
-.sec-head h2{font-size:clamp(1.5rem,3vw,2rem);margin-top:6px}
+.sec-head h2{font-size:clamp(1.5rem,3vw,2rem)}
 .sec-head p{color:var(--muted);margin:0;max-width:28em}
 
 /* price list */
@@ -157,7 +169,7 @@ tr:last-child td{border-bottom:0}
 .pill.ok{background:var(--sage-soft);color:var(--sage)}
 .pill.new{background:var(--berry-soft);color:var(--berry)}
 .pill.cancel{background:var(--line);color:var(--muted)}
-.link-btn{background:none;border:0;color:var(--danger);cursor:pointer;padding:0;font-size:.88rem}
+.link-btn{background:none;border:0;color:var(--danger);cursor:pointer;padding:10px 8px;margin:-10px -8px;font-size:.88rem}
 .empty{padding:28px;text-align:center;color:var(--muted)}
 @media (max-width:640px){.stats{grid-template-columns:1fr}}
 
@@ -190,7 +202,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <header class="nav">
   <div class="wrap">
     <a class="logo" href="#top">Mulberry <small>霧莓美甲</small></a>
-    <nav aria-label="主選單">
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav">選單</button>
+    <nav aria-label="主選單" id="siteNav">
       <a href="#menu">價目表</a>
       <a href="#looks">作品</a>
       <a href="#book">線上預約</a>
@@ -227,7 +240,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <section id="modules">
     <div class="wrap">
       <div class="sec-head">
-        <div><div class="eyebrow">Modules</div><h2>這個網站由哪些模組組成</h2></div>
+        <div><h2>這個網站由哪些模組組成</h2></div>
         <p>每個模組都可以單獨挑選、加減。先決定要哪些功能，風格與頁面配置再跟您一起討論。</p>
       </div>
       <div class="modules">
@@ -247,7 +260,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <section id="menu">
     <div class="wrap">
       <div class="sec-head">
-        <div><div class="eyebrow">Price List</div><h2>價目表</h2></div>
+        <div><h2>價目表</h2></div>
         <p>價格皆含基礎修型與甘皮處理。延甲、彩繪依指數另計，現場確認後再施作。</p>
       </div>
       <div class="menu" id="menuList"></div>
@@ -257,7 +270,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <section id="looks" class="gallery">
     <div class="wrap">
       <div class="sec-head">
-        <div><div class="eyebrow">This Season</div><h2>本季人氣款</h2></div>
+        <div><h2>本季人氣款</h2></div>
         <p>預約時備註款式名稱，美甲師會先幫妳備好色膠。</p>
       </div>
       <div class="looks" id="looks-list"></div>
@@ -267,7 +280,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <section id="book">
     <div class="wrap">
       <div class="sec-head">
-        <div><div class="eyebrow">Booking</div><h2>線上預約</h2></div>
+        <div><h2>線上預約</h2></div>
         <p>週一公休。營業時間 11:00 – 20:00，最後入座時間依服務長度自動計算。</p>
       </div>
       <div class="book-grid">
@@ -285,7 +298,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
             <div class="step-title"><span class="n">3</span>留下聯絡方式</div>
             <div class="fields">
               <label for="fName">姓名<input id="fName" autocomplete="name" placeholder="王小美"></label>
-              <label for="fPhone">手機<input id="fPhone" inputmode="tel" autocomplete="tel" placeholder="0912-345-678"></label>
+              <label for="fPhone">手機<input id="fPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0912-345-678"></label>
               <label for="fNote" class="full">備註（款式、指甲狀況）<input id="fNote" placeholder="想做本季的霧莓漸層"></label>
             </div>
             <p class="err" id="err" role="alert"></p>
@@ -314,7 +327,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <section id="admin" class="admin">
     <div class="wrap">
       <div class="sec-head">
-        <div><div class="eyebrow">Owner View</div><h2>店家後台</h2></div>
+        <div><h2>店家後台</h2></div>
         <p>老闆娘每天打開這頁就知道誰會來、做什麼、收多少。前台送出的預約會即時出現在這裡。</p>
       </div>
       <div class="stats">
@@ -455,11 +468,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   $("bookForm").addEventListener("submit",e=>{
     e.preventDefault();
     const name=$("fName").value.trim(),phone=$("fPhone").value.trim();
-    if(!state.svc)return $("err").textContent="請先選擇服務項目。";
-    if(!state.date||state.start==null)return $("err").textContent="請選擇日期和時段。";
-    if(!name)return $("err").textContent="請填寫姓名，到店時方便核對。";
-    if(!/^09\d{2}-?\d{3}-?\d{3}$/.test(phone))return $("err").textContent="手機格式像 0912-345-678，請再確認一次。";
-    if(taken(state.date,state.start,svc(state.svc).min)){renderSlots();return $("err").textContent="這個時段剛被約走了，請換一個時段。"}
+    const fail=(msg,el)=>{$("err").textContent=msg;if(el)el.focus()};
+    const firstOpt=box=>$(box).querySelector("button.opt:not(:disabled)");
+    if(!state.svc)return fail("請先選擇服務項目。",firstOpt("svcOpts"));
+    if(!state.date)return fail("請選擇日期和時段。",firstOpt("dayOpts"));
+    if(state.start==null)return fail("請選擇日期和時段。",firstOpt("slotOpts")||firstOpt("dayOpts"));
+    if(!name)return fail("請填寫姓名，到店時方便核對。",$("fName"));
+    if(!/^09\d{2}-?\d{3}-?\d{3}$/.test(phone))return fail("手機格式像 0912-345-678，請再確認一次。",$("fPhone"));
+    if(taken(state.date,state.start,svc(state.svc).min)){renderSlots();return fail("這個時段剛被約走了，請換一個時段。",firstOpt("slotOpts"))}
     const id="MB"+(2400+bookings.length+1+Math.floor(Math.random()*90));
     bookings.push({id,date:state.date,start:state.start,svc:state.svc,name,phone,note:$("fNote").value.trim(),status:"new"});
     save();
@@ -492,9 +508,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   $("adminDay").addEventListener("change",renderAdmin);
   $("adminRows").addEventListener("click",e=>{
     const id=e.target.dataset&&e.target.dataset.cancel;if(!id)return;
-    const b=bookings.find(x=>x.id===id);if(b){b.status="cancel";save();renderAdmin();renderForm();renderToday()}
+    const b=bookings.find(x=>x.id===id);if(b&&confirm(`確定要取消 ${b.name} ${hm(b.start)} 的預約嗎？`)){b.status="cancel";save();renderAdmin();renderForm();renderToday()}
   });
-  $("resetBtn").addEventListener("click",()=>{bookings=seed();save();renderAdmin();renderForm();renderToday()});
+  $("resetBtn").addEventListener("click",()=>{if(!confirm("確定要重設嗎？剛才新增或取消的預約都會清掉。"))return;bookings=seed();save();renderAdmin();renderForm();renderToday()});
+
+  /* mobile nav */
+  const navT=$("navToggle"),navL=$("siteNav");
+  const setNav=open=>{navL.classList.toggle("open",open);navT.setAttribute("aria-expanded",open)};
+  navT.addEventListener("click",()=>setNav(!navL.classList.contains("open")));
+  navL.addEventListener("click",e=>{if(e.target.closest("a"))setNav(false)});
+  addEventListener("keydown",e=>{if(e.key==="Escape"&&navL.classList.contains("open")){setNav(false);navT.focus()}});
 
   /* start: preselect a realistic state */
   state.svc="grad";state.date=ymd(days.find(d=>isOpenDay(d)&&d>today)||today);
